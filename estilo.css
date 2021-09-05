@@ -3,7 +3,7 @@
     width:150;
     height:150;
     
-    background: radial-gradient(#c3eaf0,#4bb0c2);
+    background: linear-gradient(#c3eaf0,#4bb0c2);
     font-size: 80px;
     font-family: "Comic Sans MS"
 }

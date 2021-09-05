@@ -123,8 +123,8 @@ var gameEngine=function()
         return;
     }
     boxes[i][j]=symbol;
-    this.style="background: radial-gradient(#c3eaf0,#2874A6)";
-    this.style="color:"+symbolicCol+";";
+    this.style="background: linear-gradient(#c3eaf0,#2874A6)";
+    
     let idd=""+(i+1)+""+(j+1);
     console.log(idd);
     document.getElementById(idd).innerHTML=symbol;
@@ -133,11 +133,10 @@ var gameEngine=function()
         if(judgeGame()==true)
         {
             
-            console.log(symbol+" won the game!!");
+            console.log(" "+symbol+" won the game!!");
             document.getElementById("statusBar").innerHTML=symbol+" won!!🎉";
             active=false;
-            var v=document.querySelectorAll(".ofGame");
-            v.forEach(e => e.style="background: radial-gradient(#D0D3D4,#707B7C);");
+            greyOut();
             
         }
     
@@ -146,16 +145,21 @@ var gameEngine=function()
     turns++;
     if(turns>9  &&  active)
     {
-        console.log("DRAW!");
+        console.log(" DRAW!");
         document.getElementById("statusBar").innerHTML="DRAW!!!";
         active=false;
+        greyOut();
     }
     invertSymbol();
     if(active)
     document.getElementById("statusBar").innerHTML=symbol+"'s turn";
     document.getElementById("statusBar").style="color:"+symbolicCol;
 }
-
+function greyOut()
+{
+    var v=document.querySelectorAll(".ofGame");
+    v.forEach(e => e.style="background: radial-gradient(#D0D3D4,#707B7C);");
+}
 //ACTUAL CODE STARTS
 
 
