@@ -1,0 +1,39 @@
+.ofGame
+{
+    width:150;
+    height:150;
+    
+    background: radial-gradient(#c3eaf0,#4bb0c2);
+    font-size: 80px;
+    font-family: "Comic Sans MS"
+}
+h1
+{
+    background: linear-gradient(to left,#2cc4d8,#AED6F1);
+    font-family: "Montserrat";
+    font-size:60px;
+    
+}
+body
+{
+    background: radial-gradient(#1F618D,#33ebc6);
+}
+#panel
+{
+    position: absolute;
+    left :50%;
+    /*margin: -0px 0 0 -225px;*/
+    transform: translateX(-50%);
+    min-width:460;
+    
+}
+#reload
+{
+    font-size: 65;
+    width: 460;
+    height: 100;
+    position: absolute;
+    background: radial-gradient(#A2D9CE,#116cad);
+    font-family:"Algerian";
+    
+}
