@@ -5,13 +5,20 @@
     
     background: linear-gradient(#c3eaf0,#4bb0c2);
     font-size: 80px;
-    font-family: "Comic Sans MS"
+    font-family: "Comic Sans MS";
+}
+.ofGame:hover{
+    box-shadow: 0px 0px 40px rgb(54, 173, 228);
+    text-shadow: 0px 0px 80px rgb(54, 173, 228);
 }
 h1
 {
     background: linear-gradient(to left,#2cc4d8,#AED6F1);
-    font-family: "Montserrat";
+    font-family: "Algerian";
+    color:#FFFFFF;
+    text-shadow: 10px 10px 10px rgb(64, 63, 68) , 0px 0px 0px rgb(64, 63, 68);/* x,y,spread,color*/
     font-size:60px;
+    text-align: center;
     
 }
 body
@@ -22,6 +29,7 @@ body
 {
     position: absolute;
     left :50%;
+    
     /*margin: -0px 0 0 -225px;*/
     transform: translateX(-50%);
     min-width:460;
@@ -36,4 +44,19 @@ body
     background: radial-gradient(#A2D9CE,#116cad);
     font-family:"Algerian";
     
+    
+}
+#reload:hover{
+    box-shadow: 0px 0px 80px rgb(230, 28, 28);
+}
+@keyframes Transit
+{
+    from
+    {
+        
+    }
+    to
+    {
+
+    }
 }

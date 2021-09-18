@@ -16,13 +16,13 @@ var invertSymbol=function()
 {
     if(turns%2==0)
     {
-        symbolicCol="#117A65";
-        symbol="😔";
+        symbolicCol="#2ECC71";
+        symbol="🍔";
     }
     else
     {
-        symbolicCol="#1F618D";
-        symbol="😁";
+        symbolicCol="#D6EAF8";
+        symbol="🥗";
     }
     
 }
@@ -146,24 +146,31 @@ var gameEngine=function()
     if(turns>9  &&  active)
     {
         console.log(" DRAW!");
+        document.getElementById("statusBar").innerHTML=symbol+"'s turn";
+    document.getElementById("statusBar").style="color:#FFFFFF";
         document.getElementById("statusBar").innerHTML="DRAW!!!";
         active=false;
         greyOut();
     }
     invertSymbol();
     if(active)
-    document.getElementById("statusBar").innerHTML=symbol+"'s turn";
-    document.getElementById("statusBar").style="color:"+symbolicCol;
+    {
+        document.getElementById("statusBar").innerHTML=symbol+"'s turn";
+        document.getElementById("statusBar").style="color:"+symbolicCol;
+    }
+    
 }
 function greyOut()
 {
     var v=document.querySelectorAll(".ofGame");
-    v.forEach(e => e.style="background: radial-gradient(#D0D3D4,#707B7C);");
+    v.forEach(e => e.style="background: linear-gradient(#D0D3D4,#707B7C);");
 }
 //ACTUAL CODE STARTS
 
-
-for(let i=0;i<3;i++)
+initializeBox();
+function initializeBox()
+{
+    for(let i=0;i<3;i++)
 {
     boxes[i]=new Array(3);
 }
@@ -175,7 +182,9 @@ for(let i=0;i<3;i++)
     }
     console.log("initialized");
 }
-invertSymbol();
+    invertSymbol();
+}
+
 for(let i=0;i<3;i++)
 {
     for(let j=0;j<3;j++)
@@ -188,7 +197,11 @@ for(let i=0;i<3;i++)
 }
 document.getElementById("reload").onclick=function()
 {
-    location.reload();
+    //active=true;
+    //var v=document.querySelectorAll(".ofGame");
+    console.log("Reload clicked");
+    location.reload();//remove it
+
 };
 console.log("initialized");
 
