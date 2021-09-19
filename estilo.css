@@ -9,16 +9,13 @@
     border: none;
     border-radius:30%;
 }
-.ofGame:hover{
-    box-shadow: 0px 0px 40px rgb(54, 173, 228);
-    text-shadow: 0px 0px 80px rgb(54, 173, 228);
-}
+
 h1
 {
     background: linear-gradient(to left,#2cc4d8,#AED6F1);
     font-family: "Algerian";
     color:#FFFFFF;
-    text-shadow: 10px 10px 10px rgb(64, 63, 68) , 0px 0px 0px rgb(64, 63, 68);/* x,y,spread,color*/
+    text-shadow:  10px 10px 10px rgb(44, 41, 41) ;/* x,y,spread,color*/
     font-size:60px;
     text-align: center;
     border: none;
@@ -33,8 +30,8 @@ body
 {
     position: absolute;
     left :50%;
+    font-size:0px;
     
-    /*margin: -0px 0 0 -225px;*/
     transform: translateX(-50%);
     min-width:460;
     
@@ -45,12 +42,20 @@ body
     width: 460;
     height: 100;
     position: absolute;
-    background: radial-gradient(#A2D9CE,#116cad);
+    background: radial-gradient(#A2D9CE,#db2434);
     font-family:"Algerian";
     border: none;
     border-radius: 60%;
     
     
+}
+#lines
+{
+    position:absolute;
+    top: 160px;
+    width: 450px;
+    height: 450px;
+    background-color:rgba(30,0,0,0);
 }
 #reload:hover{
     box-shadow: 0px 0px 80px rgb(230, 28, 28);

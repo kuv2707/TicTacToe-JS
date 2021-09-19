@@ -1,207 +1,248 @@
-var boxes=new Array(3);
-var turns=1;
-var printArray=function()
-{
-    for(var i=0;i<3;i++)
+class verd {
+    constructor(state, startX, startY, endX, endY) {
+        this.state = state;
+        this.x1 = startY;
+        this.y1 = startX;
+        this.x2 = endY;
+        this.y2 = endX;
+    }
+    isEnded() {
+        return this.state;
+    }
+    get getStartX()
     {
-        let temp=" ";
-        for(var j=0;j<3;j++)
-        {
-            temp+=boxes[i][j]+"\t";
+        return 900*this.x1;
+    }
+    get getStartY()
+    {
+        return 450*this.y1;
+    }
+    get getEndX()
+    {
+        return 900*this.x2;
+    }
+    get getEndY()
+    {
+        return 450*this.y2;
+    }
+
+}
+var boxes = new Array(3);
+var turns = 1;
+var printArray = function () {
+    for (var i = 0; i < 3; i++) {
+        let temp = " ";
+        for (var j = 0; j < 3; j++) {
+            temp += boxes[i][j] + "\t";
         }
         console.log(temp);
     }
 }
-var invertSymbol=function()
-{
-    if(turns%2==0)
-    {
-        symbolicCol="#2ECC71";
-        symbol="🍔";
+var invertSymbol = function () {
+    if (turns % 2 == 0) {
+        symbolicCol = "#2ECC71";
+        symbol = "🍔";
     }
-    else
-    {
-        symbolicCol="#D6EAF8";
-        symbol="🥗";
+    else {
+        symbolicCol = "#2E86C1";
+        symbol = "🥗";
     }
-    
+
 }
-var active=true;
+var active = true;
 var symbol;
 var symbolicCol;
-var judgeGame=function()
+var judgeGame = function (board)
 {
-    let ld=true,rd=true,v1=true,v2=true,v3=true,h1=true,h2=true,h3=true;
-    let s1=boxes[0][0];
-    if(s1=="_")
-    s1="xxxx";
-    //top horizontal
-    for(let i=0;i<3;i++)
+    //board is the DDA to be checked
+
+
+    const n=board.length;
+
+    //vertical check
+    for(let i=0;i<n;i++)
     {
-        if(s1!=boxes[i][0])
-        h1=false;
+        let firstval=board[i][0];
+        let bool_dec=!(firstval=="_");
+        for(let j=0;j<n;j++)
+        {
+            bool_dec=bool_dec&&(firstval==board[i][j])
+        }
+        if(bool_dec)
+        {
+            return new verd(true,i,0,i,n-1);
+        }
     }
-    //left vertical
-    for(let i=0;i<3;i++)
+    //horizontal check
+    for(let i=0;i<n;i++)
     {
-        if(s1!=boxes[0][i])
-        v1=false;
+        let firstval=board[0][i];
+        let bool_dec=!(firstval=="_");
+        for(let j=0;j<n;j++)
+        {
+            bool_dec=bool_dec&&(firstval==board[j][i])
+        }
+        if(bool_dec)
+        {
+            return new verd(true,0,i,n-1,i);
+        }
     }
-    //left diagonal
-    for(let i=0;i<3;i++)
+    //left diagonal check
+    let firstval=board[0][0];
+    let bool_dec=!(firstval=="_");
+    for(let i=0;i<n;i++)
     {
-        if(s1!=boxes[i][i])
-        ld=false;
+        
+        bool_dec=bool_dec&&(firstval==board[i][i]);
     }
-    let s2=boxes[2][0];
-    if(s2=="_")
-    s2="xxxx";
-    //right diagonal
-    for(let i=0;i<3;i++)
+    if(bool_dec)
+    return new verd(true,0,0,n-1,n-1);
+
+    //right diagonal check
+    firstval=board[n-1][0];
+    bool_dec=!(firstval=="_");
+    for(let i=0;i<n;i++)
     {
-        if(s2!=boxes[2-i][i])
-        rd=false;
+        
+        bool_dec=bool_dec&&(firstval==board[n-1-i][i]);
     }
-    //right vertical
-    for(let i=0;i<3;i++)
-    {
-        if(s2!=boxes[2][i])
-        v3=false;
-    }
-    let s3=boxes[1][1];
-    if(s3=="_")
-    s3="xxxx";
-    //middle vertical
-    for(let i=0;i<3;i++)
-    {
-        if(s3!=boxes[1][i])
-        v2=false;
-    }
-    //middle horizontal
-    for(let i=0;i<3;i++)
-    {
-        if(s3!=boxes[i][1])
-        h2=false;
-    }
-    let s4=boxes[2][2];
-    if(s4=="_")
-    s4="xxxx";
-    //bottom horizontal
-    for(let i=0;i<3;i++)
-    {
-        if(s4!=boxes[i][2])
-        h3=false;
-    }
-    let arrr=[ld,rd,h1,h2,h3,v1,v2,v3];
+    if(bool_dec)
+    return new verd(true,0,n-1,n-1,0);
+
+
     
-    let rul=arrr[0];
-    arrr.forEach(e=> rul=rul||e);
-    console.log(arrr);
-    console.log("result now: "+rul)
-    return rul;
+    return new verd(false);
+
+
 }
 
-var gameEngine=function()
-{
-    if(!active)
-    return;
-    let a=this.id;
-    let i=a.charAt(0);
-    let j=a.charAt(1);
+var gameEngine = function () {
+    if (!active)
+        return;
+    let a = this.id;
+    let i = a.charAt(0);
+    let j = a.charAt(1);
 
-    if(i<=0  ||  i>3  ||  j<=0  ||  j>3)
-    {
+    if (i <= 0 || i > 3 || j <= 0 || j > 3) {
         console.log("Invalid input");
         return;
     }
     i--;
     j--;
-    let sss=boxes[i][j];
-    if(!(sss=="_"))
-    {
+    let sss = boxes[i][j];
+    if (!(sss == "_")) {
         console.log("That box is already filled");
         return;
     }
-    boxes[i][j]=symbol;
-    this.style="background: linear-gradient(#c3eaf0,#2874A6)";
-    
-    let idd=""+(i+1)+""+(j+1);
+    boxes[i][j] = symbol;
+    //this.style="background: linear-gradient(#c3eaf0,#2874A6);";
+    this.style.background = "linear-gradient(#c3eaf0," + symbolicCol + ")";
+    let idd = "" + (i + 1) + "" + (j + 1);
     console.log(idd);
-    document.getElementById(idd).innerHTML=symbol;
+    document.getElementById(idd).innerHTML = symbol;
     printArray();
-    
-        if(judgeGame()==true)
-        {
-            
-            console.log(" "+symbol+" won the game!!");
-            document.getElementById("statusBar").innerHTML=symbol+" won!!🎉";
-            active=false;
-            greyOut();
-            
-        }
-    
-    
-    
+
+    var verd = judgeGame(boxes);
+    if (verd.isEnded() == true) {
+
+        console.log(" " + symbol + " won the game!!");
+        document.getElementById("statusBar").innerHTML = symbol + " won!!🎉";
+        active = false;
+        greyOut(verd);
+
+    }
+
+
+
     turns++;
-    if(turns>9  &&  active)
-    {
+    if (turns > 9 && active) {
         console.log(" DRAW!");
-        document.getElementById("statusBar").innerHTML=symbol+"'s turn";
-    document.getElementById("statusBar").style="color:#FFFFFF";
-        document.getElementById("statusBar").innerHTML="DRAW!!!";
-        active=false;
-        greyOut();
+        document.getElementById("statusBar").style = "color:#FFFFFF";
+        document.getElementById("statusBar").innerHTML = "DRAW!!!";
+        active = false;
+        greyOut(null);
     }
     invertSymbol();
-    if(active)
+    if (active) {
+        document.getElementById("statusBar").innerHTML = symbol + "'s turn";
+        document.getElementById("statusBar").style = "color:" + symbolicCol;
+    }
+
+}
+function greyOut(verdict) {
+    var v = document.querySelectorAll(".ofGame");
+    v.forEach(e => e.style = "background: linear-gradient(#D0D3D4,#707B7C);");
+    if(verdict!=null)
     {
-        document.getElementById("statusBar").innerHTML=symbol+"'s turn";
-        document.getElementById("statusBar").style="color:"+symbolicCol;
+        if(verdict.isEnded()==false)
+        {
+            //logical error!
+        }
+        else
+        {
+            if(true)
+            return;//the method is currently faulty
+            var lines = document.createElement("canvas");
+            
+            lines.id = "lines";
+            document.querySelector("#panel").appendChild(lines);
+            var contxt = lines.getContext("2d");
+            contxt.lineWidth = 3;
+            //contxt.fillRect(0, 0, 10, 10);
+            contxt.beginPath();
+            contxt.moveTo(verdict.getStartX,verdict.getStartY);
+            contxt.lineTo(verdict.getEndX, verdict.getEndY);
+            console.log(verdict.getStartX,verdict.getStartY);
+            console.log(verdict.getEndX, verdict.getEndY);
+            contxt.stroke();
+        }
     }
     
-}
-function greyOut()
-{
-    var v=document.querySelectorAll(".ofGame");
-    v.forEach(e => e.style="background: linear-gradient(#D0D3D4,#707B7C);");
 }
 //ACTUAL CODE STARTS
 
 initializeBox();
-function initializeBox()
-{
-    for(let i=0;i<3;i++)
-{
-    boxes[i]=new Array(3);
-}
-for(let i=0;i<3;i++)
-{
-    for(let j=0;j<3;j++)
-    {
-        boxes[i][j]="_";
+function initializeBox() {
+    for (let i = 0; i < 3; i++) {
+        boxes[i] = new Array(3);
     }
-    console.log("initialized");
-}
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            boxes[i][j] = "_";
+        }
+        console.log("initialized");
+    }
     invertSymbol();
 }
+var menter=function () {
+    if (!active)
+        this.style.boxShadow = "0px 0px 40px" + " rgb(154, 73, 228)";
+    else
+        this.style.boxShadow = "0px 0px 40px" + " rgb(0,0,0)";
+};
+var mleave=function () {
 
-for(let i=0;i<3;i++)
-{
-    for(let j=0;j<3;j++)
-    {
-        let idd=""+(i+1)+""+(j+1);
-        let t=document.getElementById(idd);
-        t.onclick=gameEngine;
+    this.style.boxShadow = "0px 0px 0px rgba(54, 173, 228,0)";
+
+};
+for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+        let idd = "" + (i + 1) + "" + (j + 1);
+        let t = document.getElementById(idd);
+        t.addEventListener("click", gameEngine);
+        t.addEventListener("mouseenter", menter);
+        t.addEventListener("mouseleave", mleave);
+        t.addEventListener("touchstart",menter);
+        t.addEventListener("touchend",mleave);
     }
-    
+
 }
-document.getElementById("reload").onclick=function()
-{
+document.getElementById("reload").addEventListener("click", function () {
     //active=true;
     //var v=document.querySelectorAll(".ofGame");
     console.log("Reload clicked");
     location.reload();//remove it
 
-};
+});
 console.log("initialized");
 
