@@ -30,9 +30,9 @@ class verd {
 var boxes = new Array(3);
 var turns = 1;
 var printArray = function () {
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         let temp = " ";
-        for (var j = 0; j < 3; j++) {
+        for (let j = 0; j < 3; j++) {
             temp += boxes[i][j] + "\t";
         }
         console.log(temp);
@@ -148,7 +148,8 @@ var gameEngine = function () {
         console.log(" " + symbol + " won the game!!");
         document.getElementById("statusBar").innerHTML = symbol + " won!!🎉";
         active = false;
-        greyOut(verd);
+        //greyOut(verd);
+        setInterval(animate,6);
 
     }
 
@@ -160,7 +161,8 @@ var gameEngine = function () {
         document.getElementById("statusBar").style = "color:#FFFFFF";
         document.getElementById("statusBar").innerHTML = "DRAW!!!";
         active = false;
-        greyOut(null);
+        //greyOut(null);
+        setInterval(animate,6);
     }
     invertSymbol();
     if (active) {
@@ -199,7 +201,7 @@ function greyOut(verdict) {
     }
     
 }
-//ACTUAL CODE STARTS
+//driver code
 
 initializeBox();
 function initializeBox() {
@@ -210,7 +212,7 @@ function initializeBox() {
         for (let j = 0; j < 3; j++) {
             boxes[i][j] = "_";
         }
-        console.log("initialized");
+        
     }
     invertSymbol();
 }
@@ -244,5 +246,18 @@ document.getElementById("reload").addEventListener("click", function () {
     location.reload();//remove it
 
 });
+var squares=document.querySelectorAll(".ofGame");
+var x=0;
+var animate=function()
+{
+    
+    //console.log(squares);
+    squares.forEach(k=>
+    {
+        k.style.background="linear-gradient(rgb("+(127+80*Math.cos(x))+",156,"+(127+60*Math.sin(x))+"),#4bb0c2)";
+        x+=0.0005;
+    });
+};
+
 console.log("initialized");
 
