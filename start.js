@@ -149,7 +149,7 @@ var gameEngine = function () {
         document.getElementById("statusBar").innerHTML = symbol + " won!!🎉";
         active = false;
         //greyOut(verd);
-        setInterval(animate,6);
+        
 
     }
 
@@ -162,7 +162,7 @@ var gameEngine = function () {
         document.getElementById("statusBar").innerHTML = "DRAW!!!";
         active = false;
         //greyOut(null);
-        setInterval(animate,6);
+        
     }
     invertSymbol();
     if (active) {
@@ -246,18 +246,26 @@ document.getElementById("reload").addEventListener("click", function () {
     location.reload();//remove it
 
 });
+
 var squares=document.querySelectorAll(".ofGame");
+var body=document.querySelector("body");
 var x=0;
 var animate=function()
 {
     
     //console.log(squares);
-    squares.forEach(k=>
+    x+=0.0005;
+    body.style.background="radial-gradient(rgb("+(127+80*Math.sin(x))+",156,"+(137+60*Math.cos(3*x))+"),#4bb0c2)";
+    if(!active)
     {
-        k.style.background="linear-gradient(rgb("+(127+80*Math.cos(x))+",156,"+(127+60*Math.sin(x))+"),#4bb0c2)";
-        x+=0.0005;
-    });
+        squares.forEach(k=>
+            {
+                k.style.background="linear-gradient(rgb("+(127+80*Math.cos(x))+",156,"+(127+60*Math.sin(x))+"),#4bb0c2)";
+                
+            });
+    }
+    
 };
-
+setInterval(animate,6);
 console.log("initialized");
 
