@@ -136,7 +136,7 @@ var gameEngine = function () {
     }
     boxes[i][j] = symbol;
     //this.style="background: linear-gradient(#c3eaf0,#2874A6);";
-    this.style.background = "linear-gradient(#c3eaf0," + symbolicCol + ")";
+    this.style.background = "linear-gradient(#c3eaf0," + symbolicCol + ",rgb(10,10,10))";
     let idd = "" + (i + 1) + "" + (j + 1);
     console.log(idd);
     document.getElementById(idd).innerHTML = symbol;
@@ -254,13 +254,13 @@ var animate=function()
 {
     
     //console.log(squares);
-    x+=0.0005;
-    body.style.background="radial-gradient(rgb("+(127+80*Math.sin(x))+",156,"+(137+60*Math.cos(3*x))+"),#4bb0c2)";
+    x+=0.005;
+    body.style.background="radial-gradient(rgb("+(177+80*Math.sin(x))+",200,"+(137+60*Math.cos(3*x))+"),#85C1E9)";
     if(!active)
     {
         squares.forEach(k=>
             {
-                k.style.background="linear-gradient(rgb("+(127+80*Math.cos(x))+",156,"+(127+60*Math.sin(x))+"),#4bb0c2)";
+                k.style.background="linear-gradient(rgb("+(167+80*Math.cos(x))+",156,"+(127+60*Math.sin(x))+"),#010101)";
                 
             });
     }

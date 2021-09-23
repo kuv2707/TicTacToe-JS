@@ -25,6 +25,7 @@ h1
 body
 {
     background: radial-gradient(#1F618D,#33ebc6);
+    
 }
 #panel
 {
@@ -33,7 +34,8 @@ body
     font-size:0px;
     
     transform: translateX(-50%);
-    min-width:460;
+    min-width:460px;
+    min-height: 700px;
     
 }
 #reload
@@ -42,7 +44,7 @@ body
     width: 460;
     height: 100;
     position: absolute;
-    background: radial-gradient(#A2D9CE,#db2434);
+    background: linear-gradient(#eefdfa,#db2434,#111111);
     font-family:"Algerian";
     border: none;
     border-radius: 60%;
