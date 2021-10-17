@@ -40,11 +40,11 @@ var printArray = function () {
 }
 var invertSymbol = function () {
     if (turns % 2 == 0) {
-        symbolicCol = "#2ECC71";
+        symbolicCol = "#2ECC71";//green
         symbol = "🍔";
     }
     else {
-        symbolicCol = "#2E86C1";
+        symbolicCol = "#2ac6d1";
         symbol = "🥗";
     }
 
@@ -255,7 +255,7 @@ var animate=function()
     
     //console.log(squares);
     x+=0.005;
-    body.style.background="radial-gradient(rgb("+(177+80*Math.sin(x))+",200,"+(137+60*Math.cos(3*x))+"),#85C1E9)";
+    body.style.background="radial-gradient(rgb("+(17+0*Math.sin(x))+",200,"+(137+60*Math.cos(3*x))+"),#85C1E9)";
     if(!active)
     {
         squares.forEach(k=>
